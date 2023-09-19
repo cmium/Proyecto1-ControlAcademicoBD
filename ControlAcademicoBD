@@ -202,20 +202,31 @@ WHERE alumnos.alumnoNombre = 'Juan Marcos Castillo'
 AND moduloCalificacion.calificacionNum >= 70
 ORDER BY cursos.cursoNombre, moduloCalificacion.calificacionNum;
 
-
 -- 2. Mostrar los profesores que ha impartido el curso de Matemáticas
 SELECT p.personalNombre
 FROM profesores p
 JOIN cursos c ON p.personalNum = c.cursoDirector
 WHERE c.cursoNombre = 'Matemáticas';
 
+-- 2. Mostrar los profesores que ha impartido el curso de Matemáticas con un alias
+SELECT p.personalNombre AS Profesor_Matematicas
+FROM profesores p
+JOIN cursos c ON p.personalNum = c.cursoDirector
+WHERE c.cursoNombre = 'Matemáticas';
+
 -- 3. Mostrar los cursos del Departamento de ingeniería en sistemas
-SELECT cursoNombre
+SELECT cursoNombre AS Cursos_IngSistemas
 FROM cursos
 WHERE deptNombre = 'Ingeniería en Sistemas';
 
 -- 4.Mostrar los nombres de los Alumnos que se matricularon en un curso a partir de ‘2022-07-01’
 SELECT DISTINCT a.alumnoNombre
+FROM alumnos a
+JOIN cursoMatricula cm ON a.alumnoNum = cm.alumnoNum
+WHERE cm.matriculaFecha >= '2022-07-01';
+
+-- 4. Mostrar los nombres de los Alumnos que se matricularon en un curso a partir de ‘2022-07-01’ con la fecha de matriculación
+SELECT DISTINCT a.alumnoNombre, cm.matriculaFecha
 FROM alumnos a
 JOIN cursoMatricula cm ON a.alumnoNum = cm.alumnoNum
 WHERE cm.matriculaFecha >= '2022-07-01';
