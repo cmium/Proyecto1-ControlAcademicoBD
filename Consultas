@@ -1,43 +1,28 @@
--- 1. Se desea saber los cursos aprobados por el estudiante ‘Juan Marcos Castillo’
-
-SELECT cursoNombre, alumnoNombre,
-  moduloCalificacion.calificacionNum AS calificacion
+-- CONSULTAS
+---------------------------------------------------------------------------------------------------------------------------------------------
+-- 1. Se desea saber los cursos aprobados por el estudiante Juan Marcos Castillo
+SELECT DISTINCT cursos.cursoNombre, alumnos.alumnoNombre, moduloCalificacion.calificacionNum AS calificacion
 FROM cursos
-INNER JOIN cursoMatricula
-ON cursos.cursoNum = cursoMatricula.cursoNum
-INNER JOIN moduloCalificacion
-ON cursoMatricula.alumnoNum = moduloCalificacion.alumnoNum
-INNER JOIN alumnos
-ON moduloCalificacion.alumnoNum = alumnos.alumnoNum
-WHERE moduloCalificacion.alumnoNum = (
-  SELECT alumnoNum
-  FROM alumnos
-  WHERE alumnoNombre = 'Juan Marcos Castillo'
-)
+INNER JOIN cursoMatricula ON cursos.cursoNum = cursoMatricula.cursoNum
+INNER JOIN moduloCalificacion ON cursoMatricula.alumnoNum = moduloCalificacion.alumnoNum
+INNER JOIN alumnos ON moduloCalificacion.alumnoNum = alumnos.alumnoNum
+WHERE alumnos.alumnoNombre = 'Juan Marcos Castillo'
 AND moduloCalificacion.calificacionNum >= 70
-ORDER BY cursoNombre, calificacion;
-
+ORDER BY cursos.cursoNombre, moduloCalificacion.calificacionNum;
 
 -- 2. Mostrar los profesores que ha impartido el curso de Matemáticas
-SELECT personalNombre
-FROM profesores
-INNER JOIN imparte
-ON profesores.personalNum = imparte.personalNum
-INNER JOIN modulos
-ON imparte.moduloNum = modulos.moduloNum
-WHERE moduloNombre = 'Matemáticas';
+SELECT p.personalNombre
+FROM profesores p
+JOIN cursos c ON p.personalNum = c.cursoDirector
+WHERE c.cursoNombre = 'Matemáticas';
 
 -- 3. Mostrar los cursos del Departamento de ingeniería en sistemas
 SELECT cursoNombre
 FROM cursos
-INNER JOIN departamentos
-ON cursos.deptNombre = departamentos.deptNombre
-WHERE deptNombre = 'Departamento de Ingeniería en Sistemas';
+WHERE deptNombre = 'Ingeniería en Sistemas';
 
--- 4. Mostrar los nombres de los Alumnos que se matricularon en un curso a partir de ‘2022-07-01’
-SELECT alumnoNombre
-FROM alumnos
-INNER JOIN cursoMatricula
-ON alumnos.alumnoNum = cursoMatricula.alumnoNum
-WHERE matriculaFecha >= '2022-07-01';
-
+-- 4.Mostrar los nombres de los Alumnos que se matricularon en un curso a partir de ‘2022-07-01’
+SELECT DISTINCT a.alumnoNombre
+FROM alumnos a
+JOIN cursoMatricula cm ON a.alumnoNum = cm.alumnoNum
+WHERE cm.matriculaFecha >= '2022-07-01';
