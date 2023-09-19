@@ -1,11 +1,16 @@
--- [Scripts]
+--SCRIPTS
+---------------------------------------------------------------------------------------------------------------------------------------------
+-- Registro de Profesores
+INSERT INTO profesores (personalNombre, estado, salario) VALUES
+  ('Profesor 1', 'Activo', 3075.00),
+  ('Profesor 2', 'Activo', 4250.00),
+  ('Profesor 3', 'Inactivo', 5000.00),
+  ('Profesor 4', 'Activo', 4325.00),
+  ('Profesor 5', 'Activo', 5250.00),
+  ('Profesor 6', 'Inactivo', 4125.10);
+ 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 -- Registro de alumnos
-USE ControlAcademicoBD
-SELECT *
-FROM alumnos
-
-
 -- alumno 1
 INSERT INTO alumnos (alumnoNombre, genero, alumnoDirecCuatrimestre, alumnoTelfnCuatrimestre, alumnoDirecFamiliar, alumnoNumTelaamiliar)
 VALUES ('Juan Marcos Castillo', 'M', 'Calle 123, Mixco', '5555-5555', '14 Calle , Mixco Zona 6', '5555-1234');
@@ -30,154 +35,64 @@ VALUES ('José Hernández Perez', 'M', 'Calle 567, Ciudad de Guatemala', '5555-5
 INSERT INTO alumnos (alumnoNombre, genero, alumnoDirecCuatrimestre, alumnoTelfnCuatrimestre, alumnoDirecFamiliar, alumnoNumTelaamiliar)
 VALUES ('Feliciano Feliz Pop', 'M', 'Calle 789, Ciudad de Guatemala', '5555-5559', '2 Calle, Ciudad de Guatemala', '5555-9999');
 
----------------------------------------------------------------------------------------------------------------------------------------------
-
--- Registro de Profesores
-USE ControlAcademicoBD
-SELECT *
-FROM profesores
-
-
--- profesor 1
-INSERT INTO profesores (personalNombre, estado, salario)
-VALUES ('Profesor 1', 'Activo', 3075.00);
-
--- profesor 2
-INSERT INTO profesores (personalNombre, estado, salario)
-VALUES ('Profesor 2', 'Activo', 4250.00);
-
--- profesor 3
-INSERT INTO profesores (personalNombre, estado, salario)
-VALUES ('Profesor 3', 'Activo', 5000.00);
-
--- profesor 4
-INSERT INTO profesores (personalNombre, estado, salario)
-VALUES ('Profesor 4', 'De baja', 4325.00);
-
--- profesor 5
-INSERT INTO profesores (personalNombre, estado, salario)
-VALUES ('Profesor 5', 'Activo', 5250.00);
-
--- profesor 6
-INSERT INTO profesores (personalNombre, estado, salario)
-VALUES ('Profesor 6', 'Activo', 4125.10);
-
-
----------------------------------------------------------------------------------------------------------------------------------------------
-
--- Registro de Cursos
-USE ControlAcademicoBD
-SELECT *
-FROM cursos
-
-INSERT INTO cursos (cursoNombre, deptNombre, cursoDirector)
-VALUES ('Programacion 1', 'Departamento Ingenería en Sistemas', 1),
-      ('Redes', 'Departamento Ingenería en Sistemas', 2),
-      ('Base de datos 1', 'Departamento Ingenería en Sistemas', 3),
-      ('Derecho Mercantil', 'Departamento Ciencias Juridicas', 4),
-      ('Matematicas', 'Departamento de Ciencias Fisicas', 5),
-	  ('Mercadotecnia', 'Departamento de Administracion', 6);
-	
----------------------------------------------------------------------------------------------------------------------------------------------
--- Registro de CursoMatricula
-USE ControlAcademicoBD
-SELECT *
-FROM cursoMatricula
-
--- cursoMatricula 1
-INSERT INTO cursoMatricula (cursoNum, alumnoNum, matriculaFecha, cuotasPagadas)
-VALUES (1, 1, '2022-07-01', 1000.09);
-
--- cursoMatricula 2
-INSERT INTO cursoMatricula (cursoNum, alumnoNum, matriculaFecha, cuotasPagadas)
-VALUES (2, 2, '2023-09-02', 2750.00);
-
--- cursoMatricula 3
-INSERT INTO cursoMatricula (cursoNum, alumnoNum, matriculaFecha, cuotasPagadas)
-VALUES (3, 3, '2022-07-01', 3025.33);
-
--- cursoMatricula 4
-INSERT INTO cursoMatricula (cursoNum, alumnoNum, matriculaFecha, cuotasPagadas)
-VALUES (4, 4, '2023-09-04', 4000.00);
-
--- cursoMatricula 5
-INSERT INTO cursoMatricula (cursoNum, alumnoNum, matriculaFecha, cuotasPagadas)
-VALUES (5, 5, '2023-09-05', 5600.00);
-
--- cursoMatricula 6
-INSERT INTO cursoMatricula (cursoNum, alumnoNum, matriculaFecha, cuotasPagadas)
-VALUES (6, 6, '2023-10-05', 5730.00);
+  ---------------------------------------------------------------------------------------------------------------------------------------------
+  -- Registro de Cursos
+INSERT INTO cursos (cursoNombre, deptNombre, cursoDirector) VALUES
+  ('Matemáticas', 'Ciencias', 1),
+  ('Historia', 'Humanidades', 2),
+  ('Sistemas Operativos', 'Ingeniería en Sistemas', 3),
+  ('Biología', 'Ciencias', 4),
+  ('Literatura', 'Humanidades', 5),
+  ('Redes de Computadoras', 'Ingeniería en Sistemas', 6);
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 -- Registro de CursoMatricula
-USE ControlAcademicoBD
-SELECT * 
-FROM modulos
+INSERT INTO modulos (moduloNombre, nivel, cursoCodigo) VALUES
+  ('Álgebra', 1, 1),
+  ('Geometría', 1, 1),
+  ('Calculo', 1, 2),
+  ('Fisica', 1, 2),
+  ('Requerimientos de Software', 1, 3),
+  ('Diseño de Software', 2, 3),
+  ('Estadistica', 2, 4),
+  ('Analitica', 2, 4),
+  ('Seminario', 3, 5),
+  ('Administracion', 3, 5),
+  ('Redes Avanzadas', 4, 6),
+  ('Seguridad Informática', 4, 6);
 
-INSERT INTO modulos (moduloNombre, nivel, cursoCodigo)
-VALUES
-('Calculo', 1, 1),
-('Física', 4, 2),
-('Derecho Informatico', 4, 3),
-('Programación', 3,4),
-('Bases de datos', 5,5),
-('Seminario', 6,6);
+---------------------------------------------------------------------------------------------------------------------------------------------
+-- Registro de CursoMatricula
+INSERT INTO cursoMatricula (cursoNum, alumnoNum, matriculaFecha, cuotasPagadas) VALUES
+  (1, 1, '2022-01-15', 1500.00),
+  (1, 2, '2022-02-20', 1800.00),
+  (3, 1, '2023-03-10', 2000.00),
+  (2, 3, '2022-07-15', 1600.00),
+  (5, 5, '2022-08-01', 2100.00),
+  (6, 6, '2023-01-10', 1900.00);
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 -- Registro de moduloMatricula
-USE ControlAcademicoBD
-SELECT * 
-FROM moduloMatricula
-
-INSERT INTO moduloMatricula (moduloNum, alumnoNum, matriculaFecha)
-VALUES
-(1, 1, '2022-07-01'),
-(2, 2, '2023-09-02'),
-(3, 3, '2022-07-01'),
-(4, 4, '2023-09-04'),
-(5, 5, '2023-09-05'),
-(6, 6, '2023-09-05');
+INSERT INTO moduloMatricula (moduloNum, alumnoNum, matriculaFecha) VALUES
+  (1, 1, '2022-01-15'),
+  (2, 1, '2022-01-15'),
+  (3, 2, '2022-02-20'),
+  (4, 2, '2022-02-20'),
+  (5, 1, '2023-03-10'),
+  (6, 3, '2022-07-15'),
+  (7, 4, '2022-08-01'),
+  (8, 4, '2022-08-01'),
+  (9, 5, '2023-01-10'),
+  (10, 5, '2023-01-10'),
+  (11, 6, '2022-12-15'),
+  (12, 6, '2022-12-15');
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 -- Registro de moduloCalificacion
-USE ControlAcademicoBD
-SELECT * 
-FROM moduloCalificacion
-
-INSERT INTO moduloCalificacion (moduloNum, alumnoNum, calificacionNum, grado)
-VALUES
-(1, 1, 95, '3 Semestre '),
+INSERT INTO moduloCalificacion (moduloNum, alumnoNum, calificacionNum, grado) VALUES
+(1, 1, 95, '3 Semestre'),
 (2, 2, 80, '4 Semestre'),
 (3, 3, 75, '5 Semestre'),
 (4, 4, 59, '6 Semestre'),
 (5, 5, 55, '5 Semestre'),
 (6, 6, 83, '4 Semestre');
-
----------------------------------------------------------------------------------------------------------------------------------------------
--- Registro de imparte
-USE ControlAcademicoBD
-SELECT * 
-FROM imparte
-
-INSERT INTO imparte (personalNum, moduloNum)
-VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6);
-
----------------------------------------------------------------------------------------------------------------------------------------------
--- Registro de prerrequisitos
-USE ControlAcademicoBD
-SELECT * 
-FROM prerrequisitos
-
-INSERT INTO prerrequisitos (moduloNum1, moduloNum2)
-VALUES
-(1, 2),
-(2, 3),
-(3, 4),
-(4, 5),
-(5, 6);
