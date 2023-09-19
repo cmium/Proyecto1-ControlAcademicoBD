@@ -1,19 +1,22 @@
 -- 1. Se desea saber los cursos aprobados por el estudiante ‘Juan Marcos Castillo’
 
-SELECT cursoNombre
+SELECT cursoNombre, alumnoNombre,
+  moduloCalificacion.calificacionNum AS calificacion
 FROM cursos
 INNER JOIN cursoMatricula
 ON cursos.cursoNum = cursoMatricula.cursoNum
-INNER JOIN moduloMatricula
-ON cursoMatricula.cursoNum = moduloMatricula.cursoNum
 INNER JOIN moduloCalificacion
-ON moduloMatricula.moduloNum = moduloCalificacion.moduloNum
-WHERE alumnoNum = (
+ON cursoMatricula.alumnoNum = moduloCalificacion.alumnoNum
+INNER JOIN alumnos
+ON moduloCalificacion.alumnoNum = alumnos.alumnoNum
+WHERE moduloCalificacion.alumnoNum = (
   SELECT alumnoNum
   FROM alumnos
   WHERE alumnoNombre = 'Juan Marcos Castillo'
 )
-AND calificacionNum >= 70;
+AND moduloCalificacion.calificacionNum >= 70
+ORDER BY cursoNombre, calificacion;
+
 
 -- 2. Mostrar los profesores que ha impartido el curso de Matemáticas
 SELECT personalNombre
